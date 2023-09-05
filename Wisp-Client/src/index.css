@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
+
+:root {
+  --text: rgb(231, 226, 243);
+  --bc: rgb(0, 0, 0);
+  --main: rgb(64, 46, 112);
+  --sec: rgb(12, 9, 22);
+  --acc: rgb(94, 68, 167);
+}
+
+
+/* Global */
+body {
+  background-color: var(--bc);
+  color: var(--text);
+  font-family: 'Inconsolata', monospace;
+}
+
+.navi{
+  height: "4.5rem";
+  background-color: var(--sec);
+}
+
+.logo {
+  width: 100px;
+}
+
+.log-btn {
+  text-decoration: none;
+  font-size: 1.4em;
+  padding: 5px 10px;
+  border-radius: 15px;
+  background-color: var(--acc);
+  color: var(--text);
+  transition: ease-out 50ms;
+}
+
+.log-btn:hover {
+  transform: scale(1.2);
+  background-color: var(--main);
+  color: var(--sec);
+  transition: ease-in 50ms;
+}
+
+.logger-btn {
+  background-color: var(--sec);
+  border: none;
+}
+
+.logger-btn:hover {
+  background-color: var(--acc);
+}
+/* reg/log */
+
+.form-reg-row {
+
+  justify-content: center;
+  padding-top: 10%
+}
+
+.form-reg-row h2 {
+  text-align: center;
+}

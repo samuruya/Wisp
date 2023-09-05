@@ -1,6 +1,6 @@
 {
-  "name": "wisp",
-  "version": "0.1.0",
+  "name": "wisp-server",
+  "version": "1.1.2",
   "description": "",
   "main": "app.js",
   "scripts": {
