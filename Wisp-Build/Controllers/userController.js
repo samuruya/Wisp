@@ -13,7 +13,7 @@ const createToken = (_id) => {
 const registerUser = async(req, res) => {
     
     try{
-        const {tag, email, password} = req.body
+        const {tag, email, password, regToken} = req.body
 
         let user = await userModel.findOne({email}); //check for user 
     
@@ -22,15 +22,17 @@ const registerUser = async(req, res) => {
         
     
         //validating user input
-        if(!tag || !email || !password) 
+        if(!tag || !email || !password || !regToken) 
             return res.status(400).json("please fill all the fields");
     
         if(!validator.isEmail(email)) 
             return res.status(400).json("The email isnt a valid email");
     
         if(password.length <= 3)
-            return res.status(400).json("your password needs to be atleast 4 chars long")
-    
+            return res.status(400).json("your password needs to be atleast 4 chars long");
+        
+        if(regToken != process.env.UNI_REG_TOKEN)
+            return res.status(400).json("wrong entry token");
         
         user = new userModel({tag, email, password})
     

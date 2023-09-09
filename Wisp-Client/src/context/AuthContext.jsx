@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { baseURL, postRequest } from "../utils/services";
 
 export const AuthContext = createContext();
@@ -11,9 +11,32 @@ export const AuthContextProvider = ({ children }) => {
         tag: "",
         email: "",
         password: "",
+        regToken: "",
     });
+    const [loginError, setLoginError] = useState(null);
+    const [isLoginLoading, setIsLoginLoading] = useState(false)
+    const [loginInfo, setLoginInfo] = useState({
+        email: "",
+        password: "",
+    });
+
+    console.log("User", user);
+    console.log(loginInfo);
+    console.log(registerInfo);
+
+    useEffect(() => {
+        const user = localStorage.getItem("User")
+
+        setUser(JSON.parse(user))
+    },[])
+
+
     const updateRegisterInfo = useCallback((info) => {
         setRegisterInfo(info);
+    }, [])
+
+    const updateLoginInfo = useCallback((info) => {
+        setLoginInfo(info);
     }, [])
 
     const registerUser = useCallback(async(e) => {
@@ -33,7 +56,35 @@ export const AuthContextProvider = ({ children }) => {
 
         localStorage.setItem("User", JSON.stringify(res))
         setUser(res)
-    }, [registerInfo])
+    }, [registerInfo]
+    );
+
+    const loginUser = useCallback(async(e) => {
+
+        e.preventDefault()
+
+        setIsLoginLoading(true)
+        setLoginError(null)
+
+        const res = await postRequest(
+            `${baseURL}/users/login`,
+            JSON.stringify(loginInfo),
+        )
+
+        setIsLoginLoading(false)
+        if(res.error){
+            return setLoginError(res)
+        }
+
+        localStorage.setItem("User", JSON.stringify(res))
+        setUser(res)
+    }, [loginInfo])
+
+
+    const logoutUser = useCallback(() => {
+        localStorage.removeItem("User")
+        setUser(null)
+    })
 
     return <AuthContext.Provider value={{
                 user,
@@ -42,6 +93,12 @@ export const AuthContextProvider = ({ children }) => {
                 registerUser,
                 registerError,
                 isRegisterLoading,
+                logoutUser,
+                loginUser,
+                loginError,
+                loginInfo,
+                updateLoginInfo,
+                isLoginLoading,
             }}>
                 {children}
             </AuthContext.Provider>

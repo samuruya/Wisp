@@ -6,6 +6,8 @@
   --main: rgb(64, 46, 112);
   --sec: rgb(12, 9, 22);
   --acc: rgb(94, 68, 167);
+  --gre: rgb(21, 20, 21);
+  --d-gre: rgb(11, 11, 10);
 }
 
 
@@ -18,11 +20,50 @@ body {
 
 .navi{
   height: "4.5rem";
-  background-color: var(--sec);
+  background: linear-gradient(231deg, rgba(88,51,194,1) 0%, rgba(31,24,50,1) 100%);
 }
 
 .logo {
   width: 100px;
+}
+
+.log-a {
+  background-color: var(--d-gre);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 0 0 20px;
+}
+
+.log-a .vstack {
+  margin: 40px;
+  display: flex;
+  justify-content: center;
+  max-height: fit-content;
+  
+}
+
+.log-b {
+  max-height: 20%;
+  background: linear-gradient(25deg, rgba(21,20,21,1) 0%, rgba(64,46,112,1) 100%);
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+.log-b img {
+  height: 100;
+}
+
+.log-b h2 {
+  position: relative;
+  margin-bottom: -5rem;
+  top: -55%; 
+  font-size: 4rem;
 }
 
 .log-btn {
@@ -33,6 +74,10 @@ body {
   background-color: var(--acc);
   color: var(--text);
   transition: ease-out 50ms;
+}
+
+.log-out {
+  background-color: red;
 }
 
 .log-btn:hover {
@@ -52,10 +97,12 @@ body {
 }
 /* reg/log */
 
+form {
+  max-height: 75vh;
+}
 .form-reg-row {
-
+  height: 100%;
   justify-content: center;
-  padding-top: 10%
 }
 
 .form-reg-row h2 {
