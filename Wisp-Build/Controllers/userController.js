@@ -34,7 +34,10 @@ const registerUser = async(req, res) => {
         if(regToken != process.env.UNI_REG_TOKEN)
             return res.status(400).json("wrong entry token");
         
-        user = new userModel({tag, email, password})
+        const bio = "No Bio Yet";
+        const pfp = "https://i.ibb.co/m8bCySY/83bc8b88cf6bc4b4e04d153a418cde62.jpg";
+
+        user = new userModel({tag, email, password, bio, pfp})
     
         const salt = await bcrypt.genSalt(10)
         user.password = await bcrypt.hash(user.password, salt)
@@ -42,8 +45,8 @@ const registerUser = async(req, res) => {
         await user.save()
     
         const token = createToken(user._id)
-    
-        res.status(200).json({_id: user._id, tag, email, token})
+        
+        res.status(200).json({_id: user._id, tag, email,  bio, pfp,token})
     }catch(error){
         console.log(error);
     }
@@ -65,7 +68,7 @@ const loginUser = async(req, res) => {
 
 
         const token = createToken(user._id)
-        res.status(200).json({_id: user._id, tag: user.tag, email, token})
+        res.status(200).json({_id: user._id, tag: user.tag, email, bio: user.bio, pfp: user.pfp, token})
 
     }catch(error) {
         console.log(error);

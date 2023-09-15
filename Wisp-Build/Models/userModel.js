@@ -22,7 +22,18 @@ const userSchema = new mongoose.Schema(
             minlength: 3,
             maxlength: 1024
         },
-
+        bio: {
+            type: String,
+            required: true,
+            minlength: 0,
+            maxlength: 255,
+        },
+        pfp: {
+            type: String,
+            required: true,
+            minlength: 0,
+            maxlength: 1024,
+        }
     }, {
         timestamps: true,
     }

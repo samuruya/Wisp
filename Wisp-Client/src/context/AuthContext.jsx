@@ -1,5 +1,6 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { baseURL, postRequest } from "../utils/services";
+import { json } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -18,6 +19,9 @@ export const AuthContextProvider = ({ children }) => {
     const [loginInfo, setLoginInfo] = useState({
         email: "",
         password: "",
+    });
+    const [pfp, newPfp] = useState ({
+        pfp: "",
     });
 
     console.log("User", user);
@@ -39,6 +43,10 @@ export const AuthContextProvider = ({ children }) => {
         setLoginInfo(info);
     }, [])
 
+    const updatePfp = useCallback((info) => {
+        newPfp(info);
+    })
+
     const registerUser = useCallback(async(e) => {
         e.preventDefault()
         setIsRegisterLoading(true)
@@ -49,10 +57,11 @@ export const AuthContextProvider = ({ children }) => {
         )
 
         setIsRegisterLoading(false)
-
+        
         if(res.error){
             return setRegisterError(res)
         }
+
 
         localStorage.setItem("User", JSON.stringify(res))
         setUser(res)
@@ -81,6 +90,28 @@ export const AuthContextProvider = ({ children }) => {
     }, [loginInfo])
 
 
+    const setPfp = useCallback(async(e) => {
+        e.preventDefault()
+
+        const file = e.target.file
+        const fr = new FileReader();
+        console.log(file)
+        const altfile = document.getElementById("fileEl")
+        fr.readAsDataURL(altfile.files[0])
+        fr.addEventListener('load', () => {
+            const url = fr.result;
+            console.log(url);
+        })
+
+        const cart = localStorage.getItem("user")
+        cart.pfp = url
+        
+        localStorage.setItem("User", JSON.stringify(cart))
+        console.log(cart);
+
+    }, [pfp])
+
+
     const logoutUser = useCallback(() => {
         localStorage.removeItem("User")
         setUser(null)
@@ -99,6 +130,7 @@ export const AuthContextProvider = ({ children }) => {
                 loginInfo,
                 updateLoginInfo,
                 isLoginLoading,
+                setPfp,
             }}>
                 {children}
             </AuthContext.Provider>
