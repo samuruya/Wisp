@@ -16,11 +16,13 @@ const registerUser = async(req, res) => {
         const {tag, email, password, regToken} = req.body
 
         let user = await userModel.findOne({email}); //check for user 
-    
+        let tagger = await userModel.findOne({tag}); //
+
         if(user) 
             return res.status(400).json("this email is already taken"); // error msg if email is already taken
         
-    
+        if(tagger) 
+            return res.status(400).json("this name is already taken"); // error msg if email is already taken
         //validating user input
         if(!tag || !email || !password || !regToken) 
             return res.status(400).json("please fill all the fields");

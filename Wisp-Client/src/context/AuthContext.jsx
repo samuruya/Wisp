@@ -24,9 +24,8 @@ export const AuthContextProvider = ({ children }) => {
         pfp: "",
     });
 
-    console.log("User", user);
-    console.log(loginInfo);
-    console.log(registerInfo);
+    
+    
 
     useEffect(() => {
         const user = localStorage.getItem("User")

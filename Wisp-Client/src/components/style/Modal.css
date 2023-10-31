@@ -1,0 +1,24 @@
+:root {
+    --text: rgb(231, 226, 243);
+    --bc: rgb(0, 0, 0);
+    --main: rgb(64, 46, 112);
+    --sec: rgb(12, 9, 22);
+    --acc: rgb(94, 68, 167);
+    --gre: rgb(21, 20, 21);
+    --d-gre: rgb(11, 11, 10);
+  }
+
+
+.btn-modal {
+    width: 100%;
+    background: var(--acc);
+    border: none;
+    transition: ease-in 100ms;
+}
+
+.btn-modal:hover {
+    background-color: var(--main);
+    transform: scale(1.1);
+    color: var(--text);
+    transition: ease-out 100ms;
+}

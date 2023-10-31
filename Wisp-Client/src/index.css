@@ -108,3 +108,7 @@ form {
 .form-reg-row h2 {
   text-align: center;
 }
+
+.btm-modal {
+  background-color: none;
+}

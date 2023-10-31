@@ -1,4 +1,5 @@
-const mongoose = reqire("mongoose")
+
+const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema({
     chatId: String,
