@@ -17,7 +17,7 @@ const Navi = () => {
                 <Nav>
                     {
                         user && (<>
-                            <Link onClick={() => logoutUser()} className="log-btn log-out" to="/Login">Logout</Link>
+                            <Link  className="log-btn" to="/u" style={{display: 'flex', flexDirection: 'row', alignItems: 'center',gap: '5px'}}><img src={user.pfp} alt="" style={{width: '45px', borderRadius: '20px'}}/>{user.tag}</Link>
                         </>)
                     }
 

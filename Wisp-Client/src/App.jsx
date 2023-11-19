@@ -16,12 +16,12 @@ function App() {
   return (
     <ChatContextProvider user={user}>
     <Nav/>
-    <Container> 
+    <Container className="mainheight">
     <Routes>
       <Route path="/" element = {user ? <Chat/> : <Login/>} />
       <Route path="/Login" element = {user ? <Chat/> : <Login/>} />
       <Route path="/Register" element = {user ? <Chat/> : <Register/>} />
-      <Route path="/u" element = {user ? <U/> : <Register/>}/>
+      <Route path="/u" element = {user ? <U/> : <Login/>}/>
       <Route path="*" element = {<Navigate to= "/"/>} />
     </Routes>
     </Container>

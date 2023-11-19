@@ -89,26 +89,6 @@ export const AuthContextProvider = ({ children }) => {
     }, [loginInfo])
 
 
-    const setPfp = useCallback(async(e) => {
-        e.preventDefault()
-
-        const file = e.target.file
-        const fr = new FileReader();
-        console.log(file)
-        const altfile = document.getElementById("fileEl")
-        fr.readAsDataURL(altfile.files[0])
-        fr.addEventListener('load', () => {
-            const url = fr.result;
-            console.log(url);
-        })
-
-        const cart = localStorage.getItem("user")
-        cart.pfp = url
-        
-        localStorage.setItem("User", JSON.stringify(cart))
-        console.log(cart);
-
-    }, [pfp])
 
 
     const logoutUser = useCallback(() => {
@@ -129,7 +109,7 @@ export const AuthContextProvider = ({ children }) => {
                 loginInfo,
                 updateLoginInfo,
                 isLoginLoading,
-                setPfp,
+
             }}>
                 {children}
             </AuthContext.Provider>
